@@ -23,8 +23,8 @@ class Lagou(object):
                 block = pattern3.findall(str(bsobj))
                 print('Page %s'%i)
                 for c,s,b in zip(company,salary,block):
-                    #with open('lagou.csv', 'a+', encoding='utf-8') as f:
-                    with open('lagou2.txt', 'a+', encoding='utf-8') as f:
+                    with open('lagou.csv', 'a+', encoding='utf-8') as f:
+                    #with open('lagou2.txt', 'a+', encoding='utf-8') as f:
                         f.write(c);f.write(s);f.write(b + '\n')
                     print(c,s,b)
                 time.sleep(.5)
