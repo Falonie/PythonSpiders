@@ -6,4 +6,5 @@ data=pd.read_csv('lagou_update.csv')
 #print(data['Salary1'].value_counts(),'\n')
 
 data2=pd.read_csv('lagou_hangzhou.csv')
-print(data2['Experience'].value_counts())
+print(data2['Experience'].value_counts(),'\n')
+print(data2['Category'].value_counts())
