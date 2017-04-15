@@ -2,7 +2,7 @@ import requests,re
 from bs4 import BeautifulSoup
 from lxml import html
 
-url = 'https://www.lagou.com/zhaopin/shujufenxishi/3/?filterOption=2'
+url = 'https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=2'
 header = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'}
 cookie = {
@@ -10,6 +10,7 @@ cookie = {
 
 for i in range(1,31):
     session = requests.session()
+    url=url.format(i)
     response = session.get(url, headers=header, cookies=cookie).text
     bsobj = BeautifulSoup(response, 'html.parser')
     sel = html.fromstring(response)
