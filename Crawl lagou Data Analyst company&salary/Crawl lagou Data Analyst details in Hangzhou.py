@@ -2,7 +2,7 @@ import requests,re
 from bs4 import BeautifulSoup
 from lxml import html
 
-url = 'https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=2'
+baseurl = 'https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=2'
 header = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'}
 cookie = {
@@ -10,7 +10,7 @@ cookie = {
 
 for i in range(1,31):
     session = requests.session()
-    url=url.format(i)
+    url=baseurl.format(i)
     response = session.get(url, headers=header, cookies=cookie).text
     bsobj = BeautifulSoup(response, 'html.parser')
     sel = html.fromstring(response)
@@ -18,5 +18,9 @@ for i in range(1,31):
     block = sel.xpath('//div[@class="p_top"]/a/span/em/text()')
     salary = sel.xpath('//span[@class="money"]/text()')
     experience = re.findall(r'<!--<i></i>-->(.*?)/', str(bsobj))
-    for c, s, e, b in zip(company_name, salary, experience, block):
-        print(c, s, e, b)
+    industry=sel.xpath('//div[@class="industry"]/text()')
+    # bsobj = bsobj.findAll("div", class_="industry")
+    # for i in bsobj:
+    #     print(i.contents[0].strip().split('/')[0])
+    for c, s, e, b, i in zip(company_name, salary, experience, block, industry):
+        print(c, s, e, b, i.strip().split('/')[0])
