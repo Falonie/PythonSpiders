@@ -11,7 +11,7 @@ session = requests.session()
 def lagou_shanghai():
     for i in range(1,31):
         url = base_url.format(i)
-        #    r = requests.get(url, cookies=cookie, headers=header).text
+        # r = requests.get(url, cookies=cookie, headers=header).text
         r = session.get(url, cookies=cookie, headers=header).content
         bsobj = BeautifulSoup(r, 'html.parser')
         pattern = re.compile(r'<span class="money">(.*?)</span>')
