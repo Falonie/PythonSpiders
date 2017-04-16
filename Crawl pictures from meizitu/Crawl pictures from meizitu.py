@@ -17,8 +17,8 @@ def downpicture():
         pic.add(picture)
         #print(title,picture)
         filename = '{}.jpg'.format(title)
-        # with open(filename, 'wb') as f:
-        #     f.write(image)
+        with open(filename, 'wb') as f:
+            f.write(image)
     return pic
 
 if __name__=='__main__':
