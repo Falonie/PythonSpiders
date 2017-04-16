@@ -24,7 +24,7 @@ class Lagou(object):
                 salary = sel.xpath('//span[@class="money"]/text()')
                 block = sel.xpath('//div[@class="p_top"]/a/span/em/text()')
                 experience = re.findall(r'<!--<i></i>-->(.*?)/', str(bsobj))
-                print('Page %s'%i)
+                print('Page %s' % i)
                 for c, s, b, e in zip(company_name, salary, block, experience):
                     #with open('lagou.csv', 'a+', encoding='utf-8') as f:
                     with open('lagou2.txt', 'a+', encoding='utf-8') as f:
@@ -37,7 +37,8 @@ class Lagou(object):
         else:
             print('Success to crawl lagou company and salary!')
 
+
 #base_url='https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=2'
-base_url='https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=3'
-a=Lagou
+base_url = 'https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=3'
+a = Lagou
 a.lagou(base_url)
