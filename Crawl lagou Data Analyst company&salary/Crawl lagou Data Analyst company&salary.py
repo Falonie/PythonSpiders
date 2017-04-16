@@ -25,5 +25,5 @@ def lagou_shanghai():
             print(c, s, b)
         time.sleep(.5)
 
-if __name__=='__main__':
+if __name__ == '__main__':
     lagou_shanghai()
