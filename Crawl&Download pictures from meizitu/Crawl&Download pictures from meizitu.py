@@ -21,6 +21,6 @@ def downpicture():
             f.write(image)
     return pic
 
-if __name__=='__main__':
+if __name__ == '__main__':
     for i,pic in enumerate(downpicture(),1):
         print(i,pic)
