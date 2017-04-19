@@ -12,7 +12,7 @@ def lagou_hangzhou():
     position = set()
     for i in range(1,31):
         session = requests.session()
-        url=baseurl.format(i)
+        url = baseurl.format(i)
         response = session.get(url, headers=header, cookies=cookie).text
         bsobj = BeautifulSoup(response, 'html.parser')
         sel = html.fromstring(response)
@@ -20,16 +20,16 @@ def lagou_hangzhou():
         block = sel.xpath('//div[@class="p_top"]/a/span/em/text()')
         salary = sel.xpath('//span[@class="money"]/text()')
         experience = re.findall(r'<!--<i></i>-->(.*?)/', str(bsobj))
-        industry=sel.xpath('//div[@class="industry"]/text()')
+        industry = sel.xpath('//div[@class="industry"]/text()')
         # bsobj = bsobj.findAll("div", class_="industry")
         # for i in bsobj:
         #     print(i.contents[0].strip().split('/')[0])
         for c, s, e, b, i in zip(company_name, salary, experience, block, industry):
             #print(c, s, e, b, i.strip().split('/')[0])
-            job_infomation=(c,s,e,b,i.strip().split('/')[0])
+            job_infomation = (c, s, e, b, i.strip().split('/')[0])
             position.add(job_infomation)
-        return position
+    return position
 
 if __name__ == '__main__':
-    for i in lagou_hangzhou():
-        print(i)
+    for i, l in enumerate(lagou_hangzhou(), 1):
+        print(i, l)
