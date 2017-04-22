@@ -24,8 +24,8 @@ def downpicture():
         pic.append(info)
         #print(title,picture)
         filename = '{}.jpg'.format(title)
-        filename = path + '\\' + filename
-        with open(filename, 'wb') as f:
+        file = path + '\\' + filename
+        with open(file, 'wb') as f:
             f.write(image)
     return pic
 
