@@ -21,7 +21,7 @@ def downpicture():
         picture = sel.xpath('//div[@class="main-image"]/p/a/img/@src')[0]
         image = session.get(picture).content
         info = (picture, title)
-        pic.append(info)
+        pic.append(info);pi.add(info)
         #print(title,picture)
         filename = '{}.jpg'.format(title)
         file = path + '\\' + filename
@@ -30,5 +30,5 @@ def downpicture():
     return pic
 
 if __name__ == '__main__':
-    for i,pic in enumerate(downpicture(),1):
-        print(i,pic)
+    for i,p in enumerate(downpicture(),1):
+        print(i,p)
