@@ -1,4 +1,4 @@
-import requests
+import requests,re
 from bs4 import BeautifulSoup
 from lxml import html,etree
 
@@ -25,4 +25,4 @@ for i in range(1,10):
     #print(books)
     print('page %s' % i)
     for b, r, *p in zip(books, rating, whole_price, fractional_price):
-        print(b, r, '.'.join(('$', p[0], p[1])))
+        print(b, r, '$' + '.'.join((p[0], p[1])))
