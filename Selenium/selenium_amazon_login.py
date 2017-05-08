@@ -7,7 +7,7 @@ driver.get('https://www.amazon.cn/ap/signin?_encoding=UTF8&openid.assoc_handle=c
 email=driver.find_element_by_name('email')
 email.send_keys('541002901@qq.com')
 password=driver.find_element_by_id('ap_password')
-password.send_keys('') #enter password here
+password.send_keys('')  #enter password here
 submit=driver.find_element_by_id('signInSubmit')
 submit.click()
 
