@@ -1,0 +1,23 @@
+DEBUG:root:message1
+ERROR:root:message2
+CRITICAL:root:message3
+ERROR:root:message2
+CRITICAL:root:message3
+ERROR:root:message2
+CRITICAL:root:message3
+CRITICAL:root:message3
+WARNING:root:message3
+ERROR:root:message4
+CRITICAL:root:message5
+INFO:root:message2
+WARNING:root:message3
+ERROR:root:message4
+CRITICAL:root:message5
+INFO:root:message2
+WARNING:root:message3
+ERROR:root:message4
+CRITICAL:root:message5
+INFO:root:message2
+WARNING:root:warning is running...
+ERROR:root:message4
+CRITICAL:root:message5
