@@ -37,7 +37,6 @@ class Lagou(object):
         else:
             print('Success to crawl lagou company and salary!')
 
-
 #base_url='https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=2'
 base_url = 'https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=3'
 a = Lagou
