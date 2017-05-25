@@ -1,0 +1,5 @@
+logging_exercise3.py main 2017-05-25 18:05:18,624 simple_example DEBUG 10 debug message
+logging_exercise3.py main 2017-05-25 18:05:18,624 simple_example INFO 20 info message
+logging_exercise3.py main 2017-05-25 18:05:18,624 simple_example WARNING 30 warning message
+logging_exercise3.py main 2017-05-25 18:05:18,625 simple_example ERROR 40 error message
+logging_exercise3.py main 2017-05-25 18:05:18,625 simple_example CRITICAL 50 critical message

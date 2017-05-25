@@ -1,6 +1,6 @@
 import logging
 
-module_logger=logging.getLogger('spam_application.zuxiliary')
+module_logger=logging.getLogger('spam_application.auxiliary')
 
 class Auxiliary():
 
