@@ -4,7 +4,8 @@ def main():
     logger=logging.getLogger('simple_example')
     logger.setLevel(logging.DEBUG)
 
-    ch=logging.StreamHandler()
+    #ch=logging.StreamHandler()
+    ch=logging.FileHandler('example3.log')
     ch.setLevel(logging.DEBUG)
 
     formatter=logging.Formatter('%(filename)s %(funcName)s %(asctime)s %(name)s %(levelname)s %(levelno)s %(message)s')
