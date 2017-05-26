@@ -35,10 +35,12 @@ def lagou(someurl):
             # with open('lagou2.txt', 'a+', encoding='utf-8') as f:
             #     f.write(c);f.write(s);f.write(b + '\n')
             print(c, s, b, e, i.strip().split('/')[0])
+
             with connection.cursor() as cursor:
                 sql = 'insert into lagou_shanghai (COMPANY,SALARY,EXPERIENCE,BLOCK,INDUSTRY) values (%s,%s,%s,%s,%s)'
                 cursor.execute(sql, ((c, s, e, b, i.strip().split('/')[0])))
                 connection.commit()
+
         print('\n')
 
 if __name__ == '__main__':
