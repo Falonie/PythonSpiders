@@ -37,7 +37,7 @@ def lagou(someurl):
             print(c, s, b, e, i.strip().split('/')[0])
             with connection.cursor() as cursor:
                 sql = 'insert into lagou_shanghai (COMPANY,SALARY,EXPERIENCE,BLOCK,INDUSTRY) values (%s,%s,%s,%s,%s)'
-                cursor.execute(sql, (c, s, b, e, i.strip().split('/')[0]))
+                cursor.execute(sql, ((c, s, e, b, i.strip().split('/')[0])))
                 connection.commit()
         print('\n')
 
