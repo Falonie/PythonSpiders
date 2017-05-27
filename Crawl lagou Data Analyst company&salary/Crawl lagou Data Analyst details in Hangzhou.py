@@ -35,7 +35,7 @@ def lagou_hangzhou():
         #     print(i.contents[0].strip().split('/')[0])
         for c, s, e, b, i in zip(company_name, salary, experience, block, industry):
             s1 = re.split(r'[-,以上]', s)[0]
-            s2 = re.split(r'[-,以上]', s)[1].replace('k', '000')
+            s2 = re.split(r'[-,以上]', s)[1]
             s1 = re.sub(r'[k,K]', '000', s1)
             s2 = re.sub(r'[k,K]', '000', s2)
             i = i.strip().split('/')[0]
