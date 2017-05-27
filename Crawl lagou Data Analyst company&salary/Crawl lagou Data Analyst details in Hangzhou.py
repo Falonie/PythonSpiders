@@ -12,19 +12,19 @@ def lagou_hangzhou():
 
     connection = pymysql.connect(host='localhost', user='root', password='1234', db='employee', charset='utf8mb4')
     with connection.cursor() as cursor:
-        create_table = 'create table lagou_shanghai(COMPANY varchar(255),BLOCK varchar(45),EXPERIENCE varchar(45),' \
+        create_table = 'create table lagou_hangzhou(COMPANY varchar(255),BLOCK varchar(45),EXPERIENCE varchar(45),' \
                        'INDUSTRY varchar(45),SALARY varchar(45),SLOWER_SALARY varchar(45),HIGHER_SALARY varchar(45))'
         cursor.execute(create_table)
         connection.commit()
 
-    position = set()
-    position_list = []
+    position_list = [];position = set()
     for i in range(1,31):
         session = requests.session()
         url = baseurl.format(i)
         response = session.get(url, headers=header, cookies=cookie).text
         bsobj = BeautifulSoup(response, 'html.parser')
         sel = html.fromstring(response)
+        # sel = etree.HTML(response)
         company_name = sel.xpath('//div[@class="company_name"]/a/text()')
         block = sel.xpath('//div[@class="p_top"]/a/span/em/text()')
         salary = sel.xpath('//span[@class="money"]/text()')
@@ -45,7 +45,7 @@ def lagou_hangzhou():
             position.add(job_infomation)
 
             with connection.cursor() as cursor:
-                sql = 'insert into lagou_shanghai (COMPANY,SALARY,SLOWER_SALARY,HIGHER_SALARY,EXPERIENCE,BLOCK,INDUSTRY) values(%s,%s,%s,%s,%s,%s,%s)'
+                sql = 'insert into lagou_hangzhou (COMPANY,SALARY,SLOWER_SALARY,HIGHER_SALARY,EXPERIENCE,BLOCK,INDUSTRY) values(%s,%s,%s,%s,%s,%s,%s)'
                 cursor.execute(sql, (c, s, s1, s2, e, b, i))
                 connection.commit()
     # return position
