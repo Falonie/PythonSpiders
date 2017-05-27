@@ -11,6 +11,11 @@ cookie = {
 def lagou_hangzhou():
 
     connection = pymysql.connect(host='localhost', user='root', password='1234', db='employee', charset='utf8mb4')
+    with connection.cursor() as cursor:
+        create_table = 'create table lagou_shanghai(COMPANY varchar(255),BLOCK varchar(45),EXPERIENCE varchar(45),' \
+                       'INDUSTRY varchar(45),SALARY varchar(45),SLOWER_SALARY varchar(45),HIGHER_SALARY varchar(45))'
+        cursor.execute(create_table)
+        connection.commit()
 
     position = set()
     position_list = []
@@ -29,16 +34,21 @@ def lagou_hangzhou():
         # for i in bsobj:
         #     print(i.contents[0].strip().split('/')[0])
         for c, s, e, b, i in zip(company_name, salary, experience, block, industry):
-            print(c, s, e, b, i.strip().split('/')[0])
-            job_infomation = (c, s, e, b, i.strip().split('/')[0])
+            s1 = re.split(r'[-,以上]', s)[0]
+            s2 = re.split(r'[-,以上]', s)[1].replace('k', '000')
+            s1 = re.sub(r'[k,K]', '000', s1)
+            s2 = re.sub(r'[k,K]', '000', s2)
+            i = i.strip().split('/')[0]
+            print(c, e, b, i, s, s1, s2)
+            job_infomation = (c, e, b, i, s, s1, s2)
             position_list.append(job_infomation)
+            position.add(job_infomation)
 
             with connection.cursor() as cursor:
-                sql = 'insert into lagou_shanghai (COMPANY,SALARY,EXPERIENCE,BLOCK,INDUSTRY) values(%s,%s,%s,%s,%s)'
-                cursor.execute(sql, (c, s, e, b, i.strip().split('/')[0]))
+                sql = 'insert into lagou_shanghai (COMPANY,SALARY,SLOWER_SALARY,HIGHER_SALARY,EXPERIENCE,BLOCK,INDUSTRY) values(%s,%s,%s,%s,%s,%s,%s)'
+                cursor.execute(sql, (c, s, s1, s2, e, b, i))
                 connection.commit()
-            # position.add(job_infomation)
-    #return position
+    # return position
 
 if __name__ == '__main__':
     # for i, l in enumerate(lagou_hangzhou(), 1):
