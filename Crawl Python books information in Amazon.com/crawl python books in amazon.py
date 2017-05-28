@@ -13,7 +13,7 @@ def amazon():
 
     connnection = pymysql.connect(host='localhost', user='root', password='1234', db='employee', charset='utf8mb4')
     with connnection.cursor() as cursor:
-        cursor.execute('create table amazon (BOOKNAME VARCHAR(256),RATING INT,PRICE VARCHAR(45)) ')
+        cursor.execute('create table amazon (BOOKNAME VARCHAR(256),RATING INT,PRICE VARCHAR(45))')
         connnection.commit()
 
     for i in range(1, 10):
