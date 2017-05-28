@@ -9,13 +9,14 @@ def lagou(someurl):
 
     connection = pymysql.connect(host='localhost', user='root', password='1234', db='employee', charset='utf8mb4')
     with connection.cursor() as cursor:
-        create_table = 'create table lagou_shanghai(COMPANY varchar(256),SALARY varchar(45),BLOCK varchar(45),EXPERIENCE varchar(45),INDUSTRY varchar(45))'
+        create_table = 'create table lagou_shanghai(COMPANY varchar(255),BLOCK varchar(45),EXPERIENCE varchar(45),' \
+                       'INDUSTRY varchar(45),SALARY varchar(45),SLOWER_SALARY varchar(45),HIGHER_SALARY varchar(45))'
         cursor.execute(create_table)
         connection.commit()
 
-    # session = requests.session()
+    session = requests.session()
     for i in range(1,31):
-        session = requests.session()
+        # session = requests.session()
         url = someurl.format(i)
     #    r = requests.get(url, cookies=cookie, headers=header).text
         r = session.get(url, cookies=cookie, headers=header).content
@@ -31,14 +32,19 @@ def lagou(someurl):
         industry = sel.xpath('//div[@class="industry"]/text()')
         print('Page %s' % i)
         for c, s, b, e, i in zip(company_name, salary, block, experience, industry):
+            s1 = re.split(r'[-,以上]', s)[0]
+            s2 = re.split(r'[-,以上]', s)[1]
+            s1 = re.sub(r'[k,K]', '000', s1)
+            s2 = re.sub(r'[k,K]', '000', s2)
+            i = i.strip().split('/')[0]
+            print(c, e, b, i, s, s1, s2)
             #with open('lagou.csv', 'a+', encoding='utf-8') as f:
             # with open('lagou2.txt', 'a+', encoding='utf-8') as f:
             #     f.write(c);f.write(s);f.write(b + '\n')
-            print(c, s, b, e, i.strip().split('/')[0])
 
             with connection.cursor() as cursor:
-                sql = 'insert into lagou_shanghai (COMPANY,SALARY,EXPERIENCE,BLOCK,INDUSTRY) values (%s,%s,%s,%s,%s)'
-                cursor.execute(sql, ((c, s, e, b, i.strip().split('/')[0])))
+                sql = 'insert into lagou_shanghai (COMPANY,SALARY,SLOWER_SALARY,HIGHER_SALARY,EXPERIENCE,BLOCK,INDUSTRY) values(%s,%s,%s,%s,%s,%s,%s)'
+                cursor.execute(sql, (c, s, s1, s2, e, b, i))
                 connection.commit()
 
         print('\n')
