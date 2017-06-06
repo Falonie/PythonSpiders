@@ -14,6 +14,11 @@ BOT_NAME = 'amazon'
 SPIDER_MODULES = ['amazon.spiders']
 NEWSPIDER_MODULE = 'amazon.spiders'
 
+# MYSQL_HOST = 'localhost'
+# MYSQL_USER = 'root'
+# MYSQL_PASSWORD = '1234'
+# MYSQL_DBNAME = 'employee'
+# MYSQL_CHARSET = 'utfmb4'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'amazon (+http://www.yourdomain.com)'
@@ -64,9 +69,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'amazon.pipelines.AmazonPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'amazon.pipelines.AmazonPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
