@@ -23,13 +23,13 @@ class Amazon(scrapy.Spider):
         books = response.xpath('.//h2[@data-attribute]/text()').extract()
         rating = response.xpath('.//div[@class="a-row a-spacing-mini"]/a/text()').extract()
         price = response.xpath('//div[@class="a-column a-span7"]/div[@class="a-row a-spacing-none"][2]/a/span/@aria-label').extract()
-        publish_date = response.xpath(
+        publishing_date = response.xpath(
             '//div[@class="a-row a-spacing-small"]/div[@class="a-row a-spacing-none"][1]/span[@class="a-size-small a-color-secondary"]/text()').extract()
 
-        for b, r, p,pd in zip(books, rating,price, publish_date):
+        for b, r, p, pd in zip(books, rating, price, publishing_date):
             amazon['books'] = b
             amazon['ratings'] = r
             amazon['price'] = p
-            amazon['publish_date'] = pd
+            amazon['publishing_date'] = pd
             yield amazon
-            #print(b,r,pd)
+            # print(b, r, p, pd)
