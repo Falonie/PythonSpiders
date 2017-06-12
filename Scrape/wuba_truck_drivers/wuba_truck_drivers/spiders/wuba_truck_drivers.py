@@ -23,7 +23,7 @@ class WubaTruckDrivers(scrapy.Spider):
         if next_page:
             yield scrapy.Request(url=next_page, callback=self.parse)
 
-    def driver_details(self,response):
+    def driver_details(self, response):
         driver = WubaTruckDriversItem()
         for item in response.xpath('//div[@class="item_con pos_info"]'):
             driver['title'] = item.xpath('div[@class="pos_base_info"]/span/text()').extract_first()
