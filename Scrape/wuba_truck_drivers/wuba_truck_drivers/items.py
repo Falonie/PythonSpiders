@@ -10,5 +10,13 @@ import scrapy
 
 class WubaTruckDriversItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    title = scrapy.Field()
+    position = scrapy.Field()
+    recruit = scrapy.Field()
+    location = scrapy.Field()
+    company = scrapy.Field()
+    scale = scrapy.Field()
+    industry = scrapy.Field()
+    job_description = scrapy.Field()
+    company_description = scrapy.Field()
     pass
