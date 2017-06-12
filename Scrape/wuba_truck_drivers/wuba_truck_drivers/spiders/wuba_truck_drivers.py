@@ -4,7 +4,7 @@ from ..items import WubaTruckDriversItem
 class WubaTruckDrivers(scrapy.Spider):
 
     name = 'wuba_truck_drivers'
-    start_urls=['http://sh.58.com/sonhuosiji/?PGTID=0d302517-0000-2d1c-ff44-d938cbcf6a78&ClickID=2']
+    start_urls = ['http://sh.58.com/sonhuosiji/?PGTID=0d302517-0000-2d1c-ff44-d938cbcf6a78&ClickID=2']
 
     # def start_requests(self):
     #     for i in range(1, 9):
@@ -17,7 +17,7 @@ class WubaTruckDrivers(scrapy.Spider):
         #            'href':item.xpath('a/@href').extract_first()}
         for href in response.xpath('//div[@id="infolist"]/dl/dt/a/@href').extract():
             # yield {'href':href}
-            yield scrapy.Request(url=href,callback=self.driver_details)
+            yield scrapy.Request(url=href, callback=self.driver_details)
 
         next_page = response.xpath('//div[@class="pager"]/a[@class="next"]/@href').extract_first()
         if next_page:

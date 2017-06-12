@@ -19,4 +19,3 @@ class WubaTruckDriversItem(scrapy.Item):
     industry = scrapy.Field()
     job_description = scrapy.Field()
     company_description = scrapy.Field()
-    pass
