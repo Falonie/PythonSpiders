@@ -19,9 +19,9 @@ class WubaTruckDrivers(scrapy.Spider):
             # yield {'href':href}
             yield scrapy.Request(url=href, callback=self.driver_details)
 
-        next_page = response.xpath('//div[@class="pager"]/a[@class="next"]/@href').extract_first()
-        if next_page:
-            yield scrapy.Request(url=next_page, callback=self.parse)
+        # next_page = response.xpath('//div[@class="pager"]/a[@class="next"]/@href').extract_first()
+        # if next_page:
+        #     yield scrapy.Request(url=next_page, callback=self.parse)
 
     def driver_details(self, response):
         driver = WubaTruckDriversItem()
