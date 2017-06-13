@@ -19,25 +19,24 @@ class WubaTruckDrivers(scrapy.Spider):
             # yield {'href':href}
             yield scrapy.Request(url=href, callback=self.driver_details)
 
-        # next_page = response.xpath('//div[@class="pager"]/a[@class="next"]/@href').extract_first()
-        # if next_page:
-        #     yield scrapy.Request(url=next_page, callback=self.parse)
+        next_page = response.xpath('//div[@class="pager"]/a[@class="next"]/@href').extract_first()
+        if next_page:
+            yield scrapy.Request(url=next_page, callback=self.parse)
 
     def driver_details(self, response):
         driver = WubaTruckDriversItem()
         for item in response.xpath('//div[@class="item_con pos_info"]'):
-            driver['title'] = item.xpath('div[@class="pos_base_info"]/span/text()').extract_first()
+            driver['title'] = item.xpath('div[@class="pos_base_info"]/span[1]/text()').extract_first()
             driver['position'] = item.xpath('span/text()').extract_first()
             driver['recruit'] = item.xpath(
                 'div[@class="pos_base_condition"]/span[@class="item_condition pad_left_none"]/text()').extract_first()
-            driver['location'] = ''.join([str(i) for i in item.xpath('div[@class="pos-area"]/span/a/text()').extract()])
-            driver['company'] = \
-            response.xpath('//div[@class="comp_baseInfo_title"]/div[@class="baseInfo_link"]/a/text()').extract()[0]
+            driver['location'] = ''.join([str(i).strip() for i in item.xpath('div[@class="pos-area"]/span/a/text()').extract()])
+            driver['company'] = response.xpath(
+                '//div[@class="comp_baseInfo_title"]/div[@class="baseInfo_link"]/a/text()').extract_first()
             # driver['scale']=item.xpath('')
             driver['industry'] = response.xpath('//p[@class="comp_baseInfo_belong"]/a/text()').extract_first()
             driver['scale'] = response.xpath('//p[@class="comp_baseInfo_scale"]/text()').extract_first()
-            driver['job_description'] = ''.join([str(i) for i in response.xpath(
+            driver['job_description'] = ''.join([str(i).strip() for i in response.xpath(
                 '//div[@class="item_con"]/div[1]/div[@class="posDes"]/div[@class="des"]/text()').extract()])
-            driver['company_description'] = ''.join(
-                [str(i) for i in response.xpath('//div[@class="intro"]/div/p/text()').extract()])
+            driver['company_description'] = ''.join([str(i).strip() for i in response.xpath('//div[@class="intro"]/div/p/text()').extract()])
         yield driver
