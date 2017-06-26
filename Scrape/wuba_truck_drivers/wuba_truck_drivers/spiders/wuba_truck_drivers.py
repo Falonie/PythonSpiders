@@ -33,7 +33,6 @@ class WubaTruckDrivers(scrapy.Spider):
             driver['location'] = ''.join([str(i).strip() for i in item.xpath('div[@class="pos-area"]/span/a/text()').extract()])
             driver['company'] = response.xpath(
                 '//div[@class="comp_baseInfo_title"]/div[@class="baseInfo_link"]/a/text()').extract_first()
-            # driver['scale']=item.xpath('')
             driver['industry'] = response.xpath('//p[@class="comp_baseInfo_belong"]/a/text()').extract_first()
             driver['scale'] = response.xpath('//p[@class="comp_baseInfo_scale"]/text()').extract_first()
             driver['job_description'] = ''.join([str(i).strip() for i in response.xpath(

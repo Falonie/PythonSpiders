@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://E:/PycharmProjects/Frontera/.idea/Frontera.iml" filepath="E:/PycharmProjects/Frontera/.idea/Frontera.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Python Crawler.iml" filepath="$PROJECT_DIR$/.idea/Python Crawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ScrapyCrawler/.idea/ScrapyCrawler.iml" filepath="$PROJECT_DIR$/../ScrapyCrawler/.idea/ScrapyCrawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ScrapySpiders/.idea/ScrapySpiders.iml" filepath="$PROJECT_DIR$/../ScrapySpiders/.idea/ScrapySpiders.iml" />
+      <module fileurl="file://E:/PycharmProjects/python/.idea/python.iml" filepath="E:/PycharmProjects/python/.idea/python.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../scrapy-training/.idea/scrapy-training.iml" filepath="$PROJECT_DIR$/../scrapy-training/.idea/scrapy-training.iml" />
+      <module fileurl="file://E:/PycharmProjects/scrapy-training-exercises/.idea/scrapy-training-exercises.iml" filepath="E:/PycharmProjects/scrapy-training-exercises/.idea/scrapy-training-exercises.iml" />
+      <module fileurl="file://E:/PycharmProjects/work/.idea/work.iml" filepath="E:/PycharmProjects/work/.idea/work.iml" />
     </modules>
   </component>
 </project>
