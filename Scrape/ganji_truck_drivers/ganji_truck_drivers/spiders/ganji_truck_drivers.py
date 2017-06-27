@@ -4,13 +4,13 @@ from ..items import GanjiTruckDriversItem
 class GanjiTruckDrivers(scrapy.Spider):
 
     name = 'ganji_truck_drivers'
-    # start_urls = ['http://sh.ganji.com/zphuoyunsiji/']
-    start_urls = ['http://sh.ganji.com/zphuoyunsiji/o{}/']
+    start_urls = ['http://sh.ganji.com/zphuoyunsiji/']
+    # start_urls = ['http://sh.ganji.com/zphuoyunsiji/o{}/']
 
-    def start_requests(self):
-        for i in range(1,5):
-            url = self.start_urls[0].format(i)
-            yield scrapy.Request(url=url, callback=self.parse)
+    # def start_requests(self):
+    #     for i in range(1,5):
+    #         url = self.start_urls[0].format(i)
+    #         yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         # for item in response.xpath('//dl'):

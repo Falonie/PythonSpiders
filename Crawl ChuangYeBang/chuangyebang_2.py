@@ -1,4 +1,4 @@
-import requests,re,csv,pymysql,time
+import requests,re,csv,pymysql,time,os
 from bs4 import BeautifulSoup
 from lxml import html
 from itertools import zip_longest
@@ -13,10 +13,16 @@ header={'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/we
 
 def chuangyebang():
 
+    downloadpath = 'E:\chuangyebang_logo'
+    if not os.path.exists(downloadpath):
+        os.mkdir(downloadpath)
+    else:
+        pass
+
     connection = pymysql.connect(host='localhost', user='root', password='1234', db='employee', charset='utf8mb4')
     session = requests.session()
 
-    for i in range(1,3):
+    for i in range(1, 890):
         url = baseurl.format(i)
         response = session.get(url=url, headers=header, cookies=cookie).text
         sel = html.fromstring(response)
@@ -33,30 +39,31 @@ def chuangyebang():
         #     i=re.sub(r'[\t\r\n,]', '', investor[0]).replace(' ','')
         #     print(n,i)
         path = 'E:\chuangyebang_logo'
+        print('page {}'.format(i))
         for item in items:
             investors = item.xpath('td[@class="tp3"]/@title')[0]
             investor = re.sub(r'[\t\r\n,]', '', investors).replace(' ', '')
-            product_name=item.xpath('td[@class="tp2"]/span[@class="tp2_tit"]/a/text()')[0]
+            product_name = item.xpath('td[@class="tp2"]/span[@class="tp2_tit"]/a/text()')[0]
             company = ''.join([str(i) for i in item.xpath('td[@class="tp2"]/span[@class="tp2_com"]/text()')])
-            financial_amount=''.join(str(i) for i in item.xpath('td[3]/div[@class="money"]/text()'))
+            financial_amount = ''.join(str(i) for i in item.xpath('td[3]/div[@class="money"]/text()'))
             rounds = ''.join(str(i) for i in item.xpath('td[4]/text()'))
             industry = ''.join(str(i) for i in item.xpath('td[last()-2]/a/text()'))
             times = ''.join(str(i) for i in item.xpath('td[last()-1]/text()'))
             image_path = item.xpath('td[1]/a/img/@src')[0]
             image = session.get(image_path).content
             print(product_name, company, financial_amount, rounds, investor, industry, times, image_path)
-            filename = '{}_{}.jpg'.format(product_name, company)
+            filename = '{}_{}_.jpg'.format(product_name, company)
             file = path + '\\' + filename
 
             try:
                 with open(file,'wb') as f:
                     f.write(image)
             except Exception as e:
-                pass
+                print(e)
 
             try:
                 with open('chuangyebang.csv','a+',newline='') as f:
-                    writer=csv.writer(f)
+                    writer = csv.writer(f)
                     writer.writerow((product_name, company, financial_amount, rounds, investor, industry, times))
             except Exception as e:
                 pass
@@ -65,6 +72,8 @@ def chuangyebang():
                 sql = 'insert into chuangyebang (PRODUCT_NAME,COMPANY_NAME,AMOUNT,ROUNDS,INVESTORS,INDUSTRY,TIME) values (%s,%s,%s,%s,%s,%s,%s)'
                 cursor.execute(sql,(product_name, company, financial_amount, rounds, investor, industry, times))
                 connection.commit()
+        time.sleep(5)
+    time.sleep(5.5)
 
 if __name__ == '__main__':
     chuangyebang()
