@@ -26,19 +26,7 @@ def chuangyebang():
         url = baseurl.format(i)
         response = session.get(url=url, headers=header, cookies=cookie).text
         sel = html.fromstring(response)
-        # items=sel.xpath('//tr[@class="table-plate3"]/td[@class="tp3"]/@title')
-        # print(items)
-        # for i,item in enumerate(items,1):
-        #     # print(re.sub(r'[\t,\r,\n,' ']','',item))
-        #     investers=re.sub(r'[\t\r\n,]', '', item).replace(' ','')
-        #     print(i,investers)
-
         items = sel.xpath('//tr[@class="table-plate3"]')
-        # for n,investors in enumerate(items,1):
-        #     investor=investors.xpath('td[@class="tp3"]/@title')
-        #     i=re.sub(r'[\t\r\n,]', '', investor[0]).replace(' ','')
-        #     print(n,i)
-        path = 'E:\chuangyebang_logo'
         print('page {}'.format(i))
         for item in items:
             investors = item.xpath('td[@class="tp3"]/@title')[0]
@@ -53,7 +41,7 @@ def chuangyebang():
             image = session.get(image_path).content
             print(product_name, company, financial_amount, rounds, investor, industry, times, image_path)
             filename = '{}_{}_.jpg'.format(product_name, company)
-            file = path + '\\' + filename
+            file = downloadpath + '\\' + filename
 
             try:
                 with open(file,'wb') as f:
