@@ -1,4 +1,4 @@
-import requests, re, time, csv, pymysql
+import requests, re, time, csv, pymysql, pymongo
 from bs4 import BeautifulSoup
 from lxml import html
 
@@ -16,8 +16,13 @@ def lagou(someurl):
         cursor.execute(create_table)
         connection.commit()
 
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    db = client['employee']
+    lagou = db['lagou']
+
     session = requests.session()
-    for i in range(1, 31):
+    position = []
+    for i in range(1, 32):
         # session = requests.session()
         url = someurl.format(i)
         #    r = requests.get(url, cookies=cookie, headers=header).text
@@ -49,8 +54,10 @@ def lagou(someurl):
                 cursor.execute(sql, (c, s, s1, s2, e, b, i))
                 connection.commit()
 
-        print('\n')
-
+            job = {'company': c, 'experience': e, 'block': b, 'industry': i, 'salary': s, 'lower salary': s1,
+                   'higher salary': s2}
+            position.append(job)
+    db['lagou'].insert_many(position)
 
 if __name__ == '__main__':
     base_url = 'https://www.lagou.com/zhaopin/shujufenxishi/{}/?filterOption=3'
