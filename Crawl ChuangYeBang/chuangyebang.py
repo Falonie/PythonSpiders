@@ -3,13 +3,13 @@ from bs4 import BeautifulSoup
 from lxml import html
 from itertools import zip_longest
 
-baseurl='http://www.cyzone.cn/event/list-764-0-{}-0-0-0-0/'
-#url='http://www.cyzone.cn/event/list-764-0-3-0-0-0-0/'
-cookie={'Cookie':'BAIDU_SSP_lcr=https://www.google.com.hk/; __utma=22723113.1992140974.1496203791.1496213503.1496220940.3; __utmc=22723113; __utmz=22723113.1496220940.3.3.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmv=22723113.|1=user=null_null=1; Hm_lvt_5f6b02d88ea6aa37bfd72ee1b554bf6f=1496203790,1496213503,1496220940; Hm_lpvt_5f6b02d88ea6aa37bfd72ee1b554bf6f=1496221033'}
-header={'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Encoding':'gzip, deflate, sdch',
-        'Accept-Language':'zh-CN,zh;q=0.8',
-        'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
+baseurl = 'http://www.cyzone.cn/event/list-764-0-{}-0-0-0-0/'
+url = 'http://www.cyzone.cn/event/list-764-0-3-0-0-0-0/'
+cookie = {
+    'Cookie': 'BAIDU_SSP_lcr=https://www.google.com.hk/; __utma=22723113.1992140974.1496203791.1496213503.1496220940.3; __utmc=22723113; __utmz=22723113.1496220940.3.3.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmv=22723113.|1=user=null_null=1; Hm_lvt_5f6b02d88ea6aa37bfd72ee1b554bf6f=1496203790,1496213503,1496220940; Hm_lpvt_5f6b02d88ea6aa37bfd72ee1b554bf6f=1496221033'}
+header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+          'Accept-Encoding': 'gzip, deflate, sdch', 'Accept-Language': 'zh-CN,zh;q=0.8',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
 
 def chuangyebang():
 
