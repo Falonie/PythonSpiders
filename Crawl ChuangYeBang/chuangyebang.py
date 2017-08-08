@@ -1,4 +1,4 @@
-import requests,re,csv,pymysql,time,os
+import requests, re, csv, pymysql, time, os
 from bs4 import BeautifulSoup
 from lxml import html
 from itertools import zip_longest
@@ -11,8 +11,8 @@ header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image
           'Accept-Encoding': 'gzip, deflate, sdch', 'Accept-Language': 'zh-CN,zh;q=0.8',
           'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
 
-def chuangyebang():
 
+def chuangyebang():
     downloadpath = 'E:\chuangyebang_logo'
     if not os.path.exists(downloadpath):
         os.mkdir(downloadpath)
@@ -44,13 +44,13 @@ def chuangyebang():
             file = downloadpath + '\\' + filename
 
             try:
-                with open(file,'wb') as f:
+                with open(file, 'wb') as f:
                     f.write(image)
             except Exception as e:
                 print(e)
 
             try:
-                with open('chuangyebang.csv','a+',newline='') as f:
+                with open('chuangyebang.csv', 'a+', newline='') as f:
                     writer = csv.writer(f)
                     writer.writerow((product_name, company, financial_amount, rounds, investor, industry, times))
             except Exception as e:
@@ -58,10 +58,11 @@ def chuangyebang():
 
             with connection.cursor() as cursor:
                 sql = 'insert into chuangyebang (PRODUCT_NAME,COMPANY_NAME,AMOUNT,ROUNDS,INVESTORS,INDUSTRY,TIME) values (%s,%s,%s,%s,%s,%s,%s)'
-                cursor.execute(sql,(product_name, company, financial_amount, rounds, investor, industry, times))
+                cursor.execute(sql, (product_name, company, financial_amount, rounds, investor, industry, times))
                 connection.commit()
         time.sleep(5)
     time.sleep(5.5)
+
 
 if __name__ == '__main__':
     chuangyebang()
