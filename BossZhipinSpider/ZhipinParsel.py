@@ -19,15 +19,13 @@ with open('E:\BOSS.txt', 'r') as f:
             # company = driver.find_element_by_name('query')
             # submit = driver.find_element_by_xpath('//form[@action="/job_detail/"]/button[@class="btn btn-search"]')
             company = wait.until(EC.presence_of_element_located((By.NAME, 'query')))
-            submit = wait.until(EC.presence_of_element_located(
-                (By.XPATH, '//form[@action="/job_detail/"]/button[@class="btn btn-search"]')))
+            submit = wait.until(EC.presence_of_element_located((By.XPATH, '//form[@action="/job_detail/"]/button[@class="btn btn-search"]')))
             company.clear()
             company.send_keys(l)
             submit.click()
             # driver.find_element_by_xpath('//div[@class="info-primary"]/h3[@class="name"]').click()
             # submit2 = driver.find_element_by_xpath('//div[@class="info-primary"]/h3[@class="name"]')
-            submit2 = wait.until(
-                EC.presence_of_element_located((By.XPATH, '//div[@class="info-primary"]/h3[@class="name"]')))
+            submit2 = wait.until(EC.presence_of_element_located((By.XPATH, '//div[@class="info-primary"]/h3[@class="name"]')))
             submit2.click()
             sel = parsel.Selector(text=driver.page_source)
             company2 = sel.xpath('//div[@class="info-primary"]/h3/text()').extract()
