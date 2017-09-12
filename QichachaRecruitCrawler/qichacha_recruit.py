@@ -18,10 +18,9 @@ def company_list():
 
 
 def get_unique_key(url):
-    # url = 'http://www.qichacha.com/search?key=%20%E5%A5%A5%E7%89%B9%E6%9C%97%E7%94%B5%E5%99%A8%EF%BC%88%E5%B9%BF%E5%B7%9E%EF%BC%89%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8'
     response = session.get(url=url, headers=headers, cookies=cookies).text
     selector = html.fromstring(response)
-    company_name = selector.xpath('//*[@id="searchlist"]/table[1]/tbody/tr[1]/td[2]/a/em/em/text()')[0]
+    company_name = selector.xpath('//*[@id="searchlist"]/table[1]/tbody/tr[1]/td[2]/a/em/em/text()|//*[@id="searchlist"]/table[1]/tbody/tr[1]/td[2]/a/em/text()')[0]
     href = selector.xpath('//*[@id="searchlist"]/table[1]/tbody/tr/td[2]/a/@href')[0]
     unique_key = re.split(r'[_.]', href)[1]
     # print(company_name, href, unique_key)
@@ -58,18 +57,15 @@ def recruit(url):
                 position.append(recruit_joblist)
             recruit_collection.insert_many(position)
             page_num += 1
-            time.sleep(10)
+            time.sleep(17)
         except Exception as e:
             break
-
+        finally:
+            time.time(7)
 
 if __name__ == '__main__':
     # print(list(company_list()))
     for i in company_list():
         print(get_unique_key(url=i))
         recruit(url=get_unique_key(url=i))
-        time.sleep(7)
-    # print(get_unique_key(url='http://www.qichacha.com/search?key=奥特朗电器（广州）有限公司'))
-    # recruit(url=get_unique_key())
-    # recruit()
     pass
