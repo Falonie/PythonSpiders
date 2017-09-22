@@ -65,7 +65,7 @@ def recruit(url):
         except Exception as e:
             break
         finally:
-            time.time(5)
+            time.sleep(5)
 
 
 if __name__ == '__main__':
