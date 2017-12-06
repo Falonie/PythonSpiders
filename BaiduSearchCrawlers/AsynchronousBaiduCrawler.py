@@ -25,7 +25,7 @@ async def asynchronous_baidu_search(url):
                 result = {'company_name': company_name, 'search_item': search_item[0], 'link': link,
                           'authentication': True}
                 search_result.append(result)
-            except:
+            except Exception:
                 for i in selector.xpath('//div[@id="content_left"]/div[position()<7]'):
                     search_item = ''.join(str(i).strip() for i in i.xpath('h3/a/descendant::text()'))
                     link = i.xpath('div/div[@class="c-span18 c-span-last"]/div[@class="f13"]/a/descendant::text()|'
@@ -65,4 +65,3 @@ if __name__ == '__main__':
     results = loop.run_until_complete(asyncio.gather(*tasks))
     loop.close()
     print(time.time() - t0)
-    pass
