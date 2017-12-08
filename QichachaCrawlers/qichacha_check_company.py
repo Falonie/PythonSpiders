@@ -1,12 +1,5 @@
-import requests, re, pymongo, random, time,logging
+import requests, re, pymongo, random, time, logging
 from lxml import html
-
-# from cookie import cookie
-# from header import header
-# header = {
-#     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'}
-# cookie = {
-#     'Cookie': 'acw_tc=AQAAADAcklWo/QEAo/ycy4VyyjbBSrqv; UM_distinctid=15ebd879834881-05709224e69dfb-3976045e-13c680-15ebd87983551c; _uab_collina=150641833753343192906233; PHPSESSID=8vo5en6lgbtiqqk8uk3mqi29l0; _umdata=2FB0BDB3C12E491DBA56D15D2243C7A74D000D6C33FCD16F79C1C9D42333892F7F8B3CB72F680169CD43AD3E795C914CD1735650C982B7CFD9C19118AC57B5DD; zg_did=%7B%22did%22%3A%20%2215ebd87988c698-01b6332be7046b-3976045e-13c680-15ebd87988d407%22%7D; zg_de1d1a35bfa24ce29bbf2c7eb17e6c4f=%7B%22sid%22%3A%201506492681105%2C%22updated%22%3A%201506492694774%2C%22info%22%3A%201506418333856%2C%22superProperty%22%3A%20%22%7B%7D%22%2C%22platform%22%3A%20%22%7B%7D%22%2C%22utm%22%3A%20%22%7B%7D%22%2C%22referrerDomain%22%3A%20%22www.qichacha.com%22%2C%22cuid%22%3A%20%22c11b6f0a73cca35a27a8af6db3c88b92%22%7D; CNZZDATA1254842228=713826384-1506416515-%7C1506564195'}
 
 collection = pymongo.MongoClient(host='127.0.0.1', port=27017)['Falonie']['淄烟-24-21-10.20_checklist']
 header = [
@@ -37,15 +30,18 @@ def check():
             sel = html.fromstring(response)
             company_name = sel.xpath('//*[@id="searchlist"]/table/tbody/tr[1]/td[2]/a/descendant::text()')
             company = ''.join(str(i).strip() for i in company_name)
-            # if company.__len__()>1:
-            # try:
-            print(company)
+            status = sel.xpath('//*[@id="searchlist"]/table/tbody/tr[1]/td[3]/descendant::text()')
+            status = ''.join(str(i).strip() for i in status)
+            company_old_name = sel.xpath('//*[@id="searchlist"]/table/tbody/tr[1]/td[2]/p[4]/descendant::text()')
+            company_old_name = ''.join(str(i).strip() for i in company_old_name)
+            telephone = sel.xpath('//*[@id="searchlist"]/table/tbody/tr[1]/td[2]/p[2]/text()')
+            telephone = ''.join(str(i).strip() for i in telephone)
             # logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S: %p', level=logging.DEBUG)
             # logging.info(msg='{0},{1}'.format(line.strip(),company))
-            a = {'company1': line.strip(), 'company2': company}
-            collection.insert(a)
-            # except Exception as e:
-            #     break
+            item = {'company_input': line.strip(), 'company_search_result': company, 'status': status,
+                    'company_old_name': company_old_name, 'telephone': telephone}
+            print(item)
+            collection.insert(item)
             time.sleep(7)
 
 
