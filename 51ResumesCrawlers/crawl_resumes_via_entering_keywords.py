@@ -1,7 +1,6 @@
 import requests, re, pymongo, time
 from lxml import html
 from multiprocessing import Pool
-
 # from postdata import data
 
 collection = pymongo.MongoClient(host='localhost', port=27017)['Falonie']['Recruit_51Job_Resume_directors']

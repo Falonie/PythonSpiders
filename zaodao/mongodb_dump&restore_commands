@@ -1,0 +1,11 @@
+mongodump --archive=zdao_总经理_filter_duplicates.gz --gzip --db Falonie --collection zdao_总经理_filter_duplicates
+
+mongorestore --gzip --archive=zdao_总经理_filter_duplicates.gz --db Falonie
+
+mongoexport --db Falonie --collection zdao_股东_filter_duplicates --type=csv --fields url --out /home/salesmind/mind-ai-data/python/trunk/FalonieRepository/zaodao/zdao_创始人_filter_duplicates.csv
+
+mongoexport --db Falonie --collection zdao_股东_filter_duplicates --type=csv --fields url --out D:\PycharmProjects\mind-ai-data\python\trunk\FalonieRepository\zaodao\zdao_股东_filter_duplicates.csv
+
+mongoexport --db Falonie --collection zdao_股东_filter_duplicates_crawled_result --type=csv --fields user_name,user_title,user_company,business,small_title,establish_time,education,faucty,education,mobile,email,qq,weixin,industry,location,url --out D:\PycharmProjects\mind-ai-data\python\trunk\FalonieRepository\zaodao\zdao_股东_filter_duplicates_crawled_result.csv
+
+mongoexport --db Falonie --collection zdao_总裁_filter_duplicates_crawled_result --type=csv --fields user_name,user_title,user_company,business,small_title,establish_time,education,faucty,education,mobile,email,qq,weixin,industry,location,url --out /home/salesmind/mind-ai-data/python/trunk/FalonieRepository/zaodao/zdao_总裁_filter_duplicates_crawled_result.csv

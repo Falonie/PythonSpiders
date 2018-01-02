@@ -62,7 +62,6 @@ def read_excel(file):
     with xlrd.open_workbook(file) as data_:
         table = data_.sheets()[0]
         company_list_ = [table.row_values(rownum)[0] for rownum in range(99262, table.nrows)]
-        # company_list_ = [table.row_values(rownum)[0] for rownum in range(0, 101)]
         return company_list_
 
 
@@ -83,7 +82,6 @@ def main_mongodb():
 
 def main_excel(file):
     t0 = time.time()
-    # urls=parse_url('http://search.51job.com/list/020000,000000,0000,00,9,99,%25E5%2587%25BA%25E5%25B7%25AE,2,7.html?lang=c&stype=1&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare=')
     tasks = [crawl_recruit(url) for url in read_excel(file)]
     loop = asyncio.get_event_loop()
     results = loop.run_until_complete(asyncio.gather(*tasks))
