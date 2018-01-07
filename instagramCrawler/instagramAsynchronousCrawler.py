@@ -1,37 +1,80 @@
-import requests, os, asyncio, aiohttp
+import requests, os, asyncio, aiohttp, pymongo, re, hashlib, time
 from lxml import html
 from pprint import pprint
 
-variable1 = {"id": "22543622", "first": 12,
-             "after": "AQArqOBtes-iKFkToFh2LK3pBuvq0_l9FcI_o-Lln6TxR1l2wOxdO43ayLdMEdxZ0A9lt6s6EyEy7JyV9MCkia3DR81iVkdflacH7WhFyebZtA"}
-variable2 = {"id": "22543622", "first": 12,
-             "after": "AQDPF9i5L0ISISzRhjp8xkoTD0rQWtTyZk3waC8HAN_YNEI3ugz3VFMXxiebUvFbCMT9L_Dx9ulH3EHQAK94fECT9n2UVGd1KryLvyfso-U_zg"}
 url = 'https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables=%7B%22id%22%3A%2222543622%22%2C%22first%22%3A12%2C%22after%22%3A%22AQCMyvT5ap6JKsqJoNynwx7tFaAi11Dhy-sXKJKRN2O2nIZ8HvRXMiGfUmMwxzzMuOcNTDxB04G1M8Vok2IvhQQhjtGriqmn7hBsyzIVEo2bqQ%22%7D'
-headers = {
-    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36'}
-cookies = {
-    'cookie': 'csrftoken=pcJFqR9OzjuIyvXD5JK9ycRBIv7AKyRA; mid=Wk7gcAAEAAGgKVpMEwCZJGYvQ7o-; ig_vw=1366; ig_pr=1; ig_or=landscape-primary; ig_vh=407; rur=FRC; urlgen="{\"time\": 1515118704\054 \"104.238.151.149\": 20473\054 \"45.77.31.59\": 20473}:1eXHdo:qKzXIoJAjHFgzem61gsNtOgRZ3Y"'}
-# pprint(data)
-path = '/media/salesmind/0002C1F9000B55A8/download_pictures'
-
-if not os.path.exists(path):
-    os.mkdir(path)
-else:
-    pass
+# path = '/media/salesmind/0002C1F9000B55A8/download_pictures'
+path = 'D:\download_pictures'
+collection = pymongo.MongoClient(host='127.0.0.1', port=27017)['Falonie']['instagram_urls_test3']
 session = requests.session()
+sema = asyncio.Semaphore(3)
 
 
-async def asynchronously_crawl_images(url):
+def create_folder():
+    os.mkdir(path) if not os.path.exists(path) else print('Aleady exists folder {}'.format(path))
+
+
+def read_mongodb():
+    urls = [_['image_url'] for _ in collection.find({})]
+    return urls
+
+
+async def image_content(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
-            # print(response.text(), type(response.text()))
-            content=await response.read()
+            content = await response.content.read()
+
             return content
 
-if __name__ == '__main__':
-    # crawl_images()
-    tasks = [asynchronously_crawl_images(url=url)]
+
+async def download_image(url):
+    image = await image_content(url)
+    s = re.split(r'[/.]', url)[-2].encode('utf-8')
+    file_name = os.path.join(path, '{}.jpg'.format(hashlib.sha224(s).hexdigest()))
+    with open(file_name, 'wb') as f:
+        f.write(image)
+
+
+async def download_image_(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            content = await response.read()
+            await asyncio.sleep(1)
+            print(content)
+            # print(await response.text())
+            # image = await content
+            # s = re.split(r'[/.]', url)[-2].encode('utf-8')
+            # file_name = os.path.join(path, '{}.jpg'.format(hashlib.sha224(s).hexdigest()))
+            # with open(file_name, 'wb') as f:
+            #     f.write(image)
+
+
+def main():
+    t0 = time.time()
+    create_folder()
+    urls = read_mongodb()
+    # tasks = [download_image(url) for url in urls]
+    tasks = [download_image_(url) for url in urls]
     loop = asyncio.get_event_loop()
     results = loop.run_until_complete(asyncio.gather(*tasks))
     loop.close()
+    print(time.time() - t0)
+
+
+if __name__ == '__main__':
+    t0 = time.time()
+    # create_folder()
+    # urls = read_mongodb()
+    # url1 = 'https://scontent-nrt1-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/c0.124.1080.1080/26066692_349677568834014_7416964411983659008_n.jpg'
+    # url2 = 'https://scontent-nrt1-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/25009074_153564655285942_2398760361760129024_n.jpg'
+    url1 = 'https://api.github.com/events'
+    url2 = 'http://www.jianshu.com/p/cd14482184a6'
+    # urls = [url1, url2]
+    tasks=[download_image_(url1),download_image_(url2)]
+    # tasks = [download_image(url) for url in urls]
+    # tasks = [download_image_(url) for url in urls]
+    loop = asyncio.get_event_loop()
+    results = loop.run_until_complete(asyncio.gather(*tasks))
+    loop.close()
+    print(time.time()-t0)
     pass

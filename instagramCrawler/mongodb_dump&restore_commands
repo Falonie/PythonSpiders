@@ -1,0 +1,13 @@
+mongodump --archive=zdao_总经理_filter_duplicates.gz --gzip --db Falonie --collection zdao_总经理_filter_duplicates
+
+mongorestore --gzip --archive=zdao_总经理_filter_duplicates.gz --db Falonie
+
+mongoexport --db Falonie --collection instagram_urls_test3 --type=csv --fields image_url --out F:\GitHub\PythonSpiders\instagramCrawler\image_url.csv
+
+mongoexport --db Falonie --collection recruit_urls_shenzhen --type=csv --fields url --out E:\PycharmProjects\mind-ai-data\python\trunk\FalonieRepository\Recruit\Recruit\recruit_urls_shenzhen.csv
+
+mongoexport --db Falonie --collection recruit_shenzhen_sales_representative --type=csv --fields company,reruit_members,position,nature,location,release_time,recruit_members_release_time,scale,industry,contact,company_info,job_description,url --out /media/salesmind/0002C1F9000B55A8/PycharmProjectsonUbuntu/mind-ai-data/python/trunk/FalonieRepository/Recruit/Recruit/recruit_深圳_销售.csv
+
+mongoexport --db Falonie --collection zdao_股东_filter_duplicates_crawled_result --type=csv --fields user_name,user_title,user_company,business,small_title,establish_time,education,faucty,education,mobile,email,qq,weixin,industry,location,url --out D:\PycharmProjects\mind-ai-data\python\trunk\FalonieRepository\zaodao\zdao_股东_filter_duplicates_crawled_result.csv
+
+mongoexport --db Falonie --collection zdao_总裁_filter_duplicates_crawled_result --type=csv --fields user_name,user_title,user_company,business,small_title,establish_time,education,faucty,education,mobile,email,qq,weixin,industry,location,url --out /home/salesmind/mind-ai-data/python/trunk/FalonieRepository/zaodao/zdao_总裁_filter_duplicates_crawled_result.csv

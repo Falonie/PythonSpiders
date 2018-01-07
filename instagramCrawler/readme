@@ -1,0 +1,7 @@
+Usage
+
+1.Extract_Urls.py
+Extract all photograph urls ,page urls,and store them into MongoDB.
+
+2.InstagramCrawler.py
+Download photographs by reading urls from MongoDB.
