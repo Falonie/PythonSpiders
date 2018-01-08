@@ -3,8 +3,8 @@ from lxml import html
 from pprint import pprint
 
 url = 'https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables=%7B%22id%22%3A%2222543622%22%2C%22first%22%3A12%2C%22after%22%3A%22AQCMyvT5ap6JKsqJoNynwx7tFaAi11Dhy-sXKJKRN2O2nIZ8HvRXMiGfUmMwxzzMuOcNTDxB04G1M8Vok2IvhQQhjtGriqmn7hBsyzIVEo2bqQ%22%7D'
-# path = '/media/salesmind/0002C1F9000B55A8/download_pictures'
-path = 'D:\download_pictures'
+path = '/media/salesmind/0002C1F9000B55A8/download_pictures'
+# path = 'D:\download_pictures'
 collection = pymongo.MongoClient(host='127.0.0.1', port=27017)['Falonie']['instagram_urls_test3']
 session = requests.session()
 sema = asyncio.Semaphore(3)
@@ -65,10 +65,10 @@ if __name__ == '__main__':
     t0 = time.time()
     # create_folder()
     # urls = read_mongodb()
-    # url1 = 'https://scontent-nrt1-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/c0.124.1080.1080/26066692_349677568834014_7416964411983659008_n.jpg'
-    # url2 = 'https://scontent-nrt1-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/25009074_153564655285942_2398760361760129024_n.jpg'
-    url1 = 'https://api.github.com/events'
-    url2 = 'http://www.jianshu.com/p/cd14482184a6'
+    url1 = 'https://scontent-nrt1-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/c0.124.1080.1080/26066692_349677568834014_7416964411983659008_n.jpg'
+    url2 = 'https://scontent-nrt1-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/25009074_153564655285942_2398760361760129024_n.jpg'
+    # url1 = 'https://api.github.com/events'
+    # url2 = 'http://www.jianshu.com/p/cd14482184a6'
     # urls = [url1, url2]
     tasks=[download_image_(url1),download_image_(url2)]
     # tasks = [download_image(url) for url in urls]

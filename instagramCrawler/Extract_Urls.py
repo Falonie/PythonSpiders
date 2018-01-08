@@ -1,15 +1,8 @@
-import requests, os, pymongo, time
+import pymongo, time
 from lxml import html
 from selenium import webdriver
-from pprint import pprint
 
-collection = pymongo.MongoClient(host='127.0.0.1', port=27017)['Falonie']['instagram_urls_test3']
-# path = '/media/salesmind/0002C1F9000B55A8/download_pictures'
-path = 'D:\download_pictures'
-
-
-def create_folder():
-    os.mkdir(path) if not os.path.exists(path) else print('Aleady exists folder {}'.format(path))
+collection = pymongo.MongoClient(host='127.0.0.1', port=27017)['Falonie']['instagram_urls']
 
 
 def pagesource():
