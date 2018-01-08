@@ -12,28 +12,6 @@ cookies = {
     'Cookie': '_user_identify_=06c73d83-e39f-35cc-99d4-01475a7fcd59; JSESSIONID=aaaqUZqo52kQef6UEa0aw; uID=461384; sID=45990bad645f6f76bf6e38016969fb85; Hm_lvt_37854ae85b75cf05012d4d71db2a355a=1512701031; Hm_lpvt_37854ae85b75cf05012d4d71db2a355a=1512721796; Hm_lvt_ddf0d99bc06024e29662071b7fc5044f=1512701030; Hm_lpvt_ddf0d99bc06024e29662071b7fc5044f=1512721796'}
 collection = pymongo.MongoClient(host='localhost', port=27017)['Falonie']['innotree_成熟期']
 file = 'innotree_成熟期_filter_duplicates.xlsx'
-test_list = [{'logo_url': 'https://innotreelogo.qiniu.innotree.cn/Fk-5x2MdQm61XBMneKzGUVzrMmks', 'product_name': '企加云',
-              'product_url': 'https://www.innotree.cn/inno/company/4957871552628651946.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/FqXPsWFyl-m9mUjZiv2zj6VRXFPo',
-              'product_name': '富勒FLUX', 'product_url': 'https://www.innotree.cn/inno/company/6354892653699219687.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/Fs8sk6PYMJ5U0jJwrgockE-mDJS1', 'product_name': '唐人医药',
-              'product_url': 'https://www.innotree.cn/inno/company/10548078748520937734.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/FnkkWORkkEG0fIF47mMxKNreX_fE', 'product_name': '帛珑',
-              'product_url': 'https://www.innotree.cn/inno/company/1183084103595171085.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/FpkSIaay3OBeM91QkCO5riDn2GdE', 'product_name': '盟科医药',
-              'product_url': 'https://www.innotree.cn/inno/company/999980423478866118.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/FsR-qnw7jsNvW2pIIiTft-XUAm-3', 'product_name': '云途腾',
-              'product_url': 'https://www.innotree.cn/inno/company/10005682308130865808.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/FhrYl_FpoPSW0C0F9cI9CD3z4Njn', 'product_name': '国大药房',
-              'product_url': 'https://www.innotree.cn/inno/company/7609729055695446200.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/FuhBlsv64JhgDjYu-FsF3KCOFJjB', 'product_name': '盛开体育',
-              'product_url': 'https://www.innotree.cn/inno/company/12044156300577152751.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/FmHq3QMKqq8A7Hek-W-TeZavXdbd',
-              'product_name': 'TransferEasy',
-              'product_url': 'https://www.innotree.cn/inno/company/4020570908260780691.html'},
-             {'logo_url': 'https://innotreelogo.qiniu.innotree.cn/FlpnPzR4dkjqn_JlohHf9g99P-V5',
-              'product_name': '青芒果旅行网',
-              'product_url': 'https://www.innotree.cn/inno/company/10151547046756713819.html'}]
 
 
 class Innotree(object):

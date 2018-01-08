@@ -8,18 +8,7 @@ file = 'innotree_早期_filter_duplicates.xlsx'
 db = pymongo.MongoClient(host='localhost', port=27017)['Falonie']
 collection_read = db['innotree_beijing_zhongzi_filter_duplicates']
 collection = db['innotree_战略并购_filter_duplicates_crawled_result']
-# pprint(test_list)
-# pprint([url.setdefault('product_url') for url in test_list])
-urls = ['https://www.innotree.cn/inno/company/4957871552628651946.html',
-        'https://www.innotree.cn/inno/company/6354892653699219687.html',
-        'https://www.innotree.cn/inno/company/10548078748520937734.html',
-        'https://www.innotree.cn/inno/company/1183084103595171085.html',
-        'https://www.innotree.cn/inno/company/999980423478866118.html',
-        'https://www.innotree.cn/inno/company/10005682308130865808.html',
-        'https://www.innotree.cn/inno/company/7609729055695446200.html',
-        'https://www.innotree.cn/inno/company/12044156300577152751.html',
-        'https://www.innotree.cn/inno/company/4020570908260780691.html',
-        'https://www.innotree.cn/inno/company/10151547046756713819.html']
+
 headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36'}
 cookies = {
