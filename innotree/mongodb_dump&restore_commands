@@ -1,0 +1,9 @@
+mongodump --archive=innotree_战略并购_filter_duplicates.gz --gzip --db Falonie --collection innotree_战略并购_filter_duplicates
+
+mongorestore --gzip --archive=innotree_战略投资_filter_duplicates_crawled_result.gz --db Falonie
+
+mongoexport --db Falonie --collection innotree_成长期_filter_duplicates --type=csv --fields url --out /home/salesmind/mind-ai-data/python/trunk/FalonieRepository/innotree/innotree_成长期_filter_duplicates.csv
+
+mongoexport --db Falonie --collection innotree_早期_filter_duplicates --type=csv --fields url --out E:\PycharmProjects\mind-ai-data\python\trunk\FalonieRepository\innotree\innotree_早期_filter_duplicates.csv
+
+mongoexport --db Falonie --collection innotree_战略投资_filter_duplicates_crawled_result --type=csv --fields '公司中文名: ','注册资本: ','注册地址: ','法人代表: ','成立时间: ','官方联系方式: ',province,homepage,brief_intro,investment,leadership,tags,product,logo_url,url --out /home/salesmind/mind-ai-data/python/trunk/FalonieRepository/innotree/innotree_战略投资_filter_duplicates_crawled_result.csv
