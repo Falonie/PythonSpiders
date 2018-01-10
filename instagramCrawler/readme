@@ -1,7 +1,10 @@
+Description
+This project is intended to crawl all images from link https://www.instagram.com/ahmad_monk/.
+
 Usage
 
-1.Extract_Urls.py
+step1 Extract_Urls.py
 Extract all photograph urls ,page urls,and store them into MongoDB.
 
-2.InstagramCrawler.py
+step2 InstagramCrawler.py
 Download photographs by reading urls from MongoDB.
