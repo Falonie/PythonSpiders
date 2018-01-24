@@ -43,8 +43,11 @@ def check(file_path):
             establish_time = ''.join(str(i).strip() for i in establish_time)
             registered_capital = sel.xpath('//*[@id="searchlist"]/table/tbody/tr[1]/td[2]/p[1]/span[1]/text()')
             registered_capital = ''.join(str(i).strip() for i in registered_capital)
-            basic_info_url = sel.xpath('//*[@id="searchlist"]/table/tbody/tr[1]/td[2]/a/@href')[0]
-            basic_info_url = 'http://www.qichacha.com' + basic_info_url
+            try:
+                basic_info_url = sel.xpath('//*[@id="searchlist"]/table/tbody/tr[1]/td[2]/a/@href')[0]
+                basic_info_url = 'http://www.qichacha.com' + basic_info_url
+            except Exception:
+                basic_info_url = 'N/A'
             # logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S: %p', level=logging.DEBUG)
             # logging.info(msg='{0},{1}'.format(line.strip(),company))
             item = {'company_input': line.strip(), 'company_search_result': company, 'status': status,

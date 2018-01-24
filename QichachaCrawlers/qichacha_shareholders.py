@@ -1,4 +1,13 @@
-import requests, re, time, pymongo, pymysql, csv, logging, xlrd
+# -*- coding: utf-8 -*-
+__author__ = 'Falonie'
+import requests
+import re
+import time
+import pymongo
+import pymysql
+import xlrd
+import random
+import logging
 from lxml import html
 
 headers = {
@@ -8,7 +17,7 @@ cookies = {
 connection = pymysql.connect(host='localhost', user='root', password='1234', db='Falonie', charset='utf8mb4')
 shareholders_collection = pymongo.MongoClient(host='localhost', port=27017)['Falonie']['qichacha_shareholders2']
 session = requests.session()
-file = '/media/salesmind/Other/云鸟-21.xlsx'
+file_path = '/media/salesmind/Other/云鸟-21.xlsx'
 
 
 def company_list(file):
@@ -51,8 +60,8 @@ def shareholders(url):
     company = pattern.findall(url)[0]
     shareholders_list = []
     try:
-        for j, i in enumerate(sel.xpath('//*[@id="Sockinfo"]/table[@class="m_changeList"]/tr[position()>1]'), 1):
-            s = i.xpath('td/text()|td/div/a[1]/text()')
+        for j, i in enumerate(sel.xpath('//*[@id="Sockinfo"]/table[@class="ntable ntable-odd"]/tr[position()>1]'), 1):
+            s = i.xpath('td/text()|td/div/a[1]/text()|td/a[1]/text()')
             shareholder = ','.join(str(i).strip() for i in s)
             logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S: %p', level=logging.DEBUG)
             logging.info(msg='{} {}'.format(company, shareholder))
@@ -65,9 +74,12 @@ def shareholders(url):
         print(e)
 
 
+def manage():
+    for i, j in enumerate(company_list_excel(file_path), 1):
+        print(get_unique_key(url=j))
+        shareholders(get_unique_key(j))
+        time.sleep(3)
+
+
 if __name__ == '__main__':
-    for i in company_list_excel(file):
-        print(get_unique_key(url=i))
-        shareholders(get_unique_key(i))
-        # print(i)
-        # print(get_unique_key(i))
+    manage()
