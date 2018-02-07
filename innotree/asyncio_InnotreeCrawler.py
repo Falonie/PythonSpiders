@@ -1,4 +1,9 @@
-import re, xlrd, time, csv, asyncio, aiohttp, pymongo
+import re
+import xlrd
+import time
+import asyncio
+import aiohttp
+import pymongo
 from lxml import html
 
 db = pymongo.MongoClient(host='localhost', port=27017)['Falonie']
@@ -21,25 +26,22 @@ async def asynchronous_baidu_search(url):
                 item_dict.update({k: v for k, v in zip(title, text)})
             for _ in selector.xpath('//div[@class="mech_170525_nav"]/table/tr/td[2]/div'):
                 province = _.xpath('a[1]/text()')
-                province = ''.join(str(i).strip() for i in province)
+                item_dict['province'] = ''.join(str(i).strip() for i in province)
                 homepage = _.xpath('a[2]/text()')
-                homepage = ''.join(str(i).strip() for i in homepage)
-                item_dict.update({'province': province, 'homepage': homepage})
+                item_dict['homepage'] = ''.join(str(i).strip() for i in homepage)
             logo_url = selector.xpath('//div[@class="mech_170525_nav"]/table/tr/td[1]/img/@src')
-            logo_url = ''.join(str(i).strip() for i in logo_url)
+            item_dict['logo_url'] = ''.join(str(i).strip() for i in logo_url)
             product = selector.xpath('//h3[@class="mech_170525_nav_h3"]/descendant::text()')
-            product = ''.join(str(i).strip() for i in product)
-            tags = selector.xpath('//div[@class="mech_170525_nav_d01"]/span/a/text()')
+            item_dict['product'] = ''.join(str(i).strip() for i in product)
+            item_dict['tags'] = selector.xpath('//div[@class="mech_170525_nav_d01"]/span/a/text()')
             brief_intro = selector.xpath('//div[@class="de_170822_d01_d02"]/descendant::text()')
-            brief_intro = re.sub('[\n\xa0 ]', '', ''.join(str(i).strip() for i in brief_intro))
+            item_dict['brief_intro'] = re.sub('[\n\xa0 ]', '', ''.join(str(i).strip() for i in brief_intro))
             investment = selector.xpath('//div[@class="de_170822_d01_d03"]/table/tr/td/descendant::text()')
-            investment = ''.join(str(i).strip() for i in investment)
+            item_dict['investment'] = ''.join(str(i).strip() for i in investment)
             leadership = selector.xpath(
                 '//div[@class="de_170822_d01_d05 de_170822_d01_d05_ov"]/table/tr/td[position()>1]/span/text()')
-            leadership = ''.join(str(i).strip() for i in leadership)
-            item_dict.update(
-                {'brief_intro': brief_intro, 'investment': investment, 'leadership': leadership, 'tags': tags,
-                 'product': product, 'logo_url': logo_url, 'url': url})
+            item_dict['leadership'] = ''.join(str(i).strip() for i in leadership)
+            item_dict['url'] = url
             collection.insert(item_dict)
             return item_dict
 
